@@ -220,7 +220,7 @@ include __DIR__ . '/side_bar_director.php';
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -235,7 +235,7 @@ include __DIR__ . '/side_bar_director.php';
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -250,7 +250,7 @@ include __DIR__ . '/side_bar_director.php';
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -265,7 +265,7 @@ include __DIR__ . '/side_bar_director.php';
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -280,7 +280,7 @@ include __DIR__ . '/side_bar_director.php';
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                           
                                         </td>
                                     </tr>
                                     <tr>
@@ -295,7 +295,7 @@ include __DIR__ . '/side_bar_director.php';
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -310,7 +310,7 @@ include __DIR__ . '/side_bar_director.php';
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -325,7 +325,7 @@ include __DIR__ . '/side_bar_director.php';
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                            
                                         </td>
                                     </tr>
                                 </tbody>

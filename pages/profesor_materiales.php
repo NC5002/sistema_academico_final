@@ -122,9 +122,7 @@ include __DIR__ . '/side_bar_profesor.php';
                         <button class="btn btn-primary me-2">
                             <i class="bi bi-folder-plus"></i> Nueva Carpeta
                         </button>
-                        <button class="btn btn-secondary">
-                            <i class="bi bi-cloud-upload"></i> Subir Archivos
-                        </button>
+                        
                     </div>
                 </div>
 

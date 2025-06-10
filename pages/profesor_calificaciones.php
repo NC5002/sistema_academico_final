@@ -70,12 +70,7 @@ include __DIR__ . '/side_bar_profesor.php';
                         <button class="btn btn-success me-2 edit-permission-professor" data-bs-toggle="modal" data-bs-target="#newGradeModal">
                             <i class="bi bi-plus-circle"></i> Nueva Calificación
                         </button>
-                        <button class="btn btn-primary me-2 edit-permission-professor">
-                            <i class="bi bi-upload"></i> Importar Calificaciones
-                        </button>
-                        <button class="btn btn-secondary edit-permission-professor">
-                            <i class="bi bi-printer"></i> Imprimir Reporte
-                        </button>
+                        
                     </div>
                 </div>
 

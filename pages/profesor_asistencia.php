@@ -112,12 +112,7 @@ include __DIR__ . '/side_bar_profesor.php';
                         <button class="btn btn-success me-2">
                             <i class="bi bi-check-all"></i> Marcar Todos Presentes
                         </button>
-                        <button class="btn btn-primary me-2">
-                            <i class="bi bi-download"></i> Exportar
-                        </button>
-                        <button class="btn btn-secondary">
-                            <i class="bi bi-printer"></i> Imprimir
-                        </button>
+                        
                     </div>
                 </div>
 

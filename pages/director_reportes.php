@@ -91,15 +91,7 @@ include __DIR__ . '/side_bar_director.php';
                                         <option value="custom">Personalizado</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="reportFormat" class="form-label">Formato</label>
-                                    <select class="form-select" id="reportFormat">
-                                        <option value="web" selected>Web</option>
-                                        <option value="pdf">PDF</option>
-                                        <option value="excel">Excel</option>
-                                        <option value="csv">CSV</option>
-                                    </select>
-                                </div>
+                                
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-4">

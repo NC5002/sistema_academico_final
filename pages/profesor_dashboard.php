@@ -361,41 +361,6 @@ include __DIR__ . '/side_bar_profesor.php';
                         </div>
                     </div>
                 </div>
-
-                <!-- Quick Actions -->
-                <div class="card mb-4">
-                    <div class="card-header card-header-academic">
-                        <h5 class="mb-0 text-white">Acciones Rápidas</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row text-center">
-                            <div class="col-md-3 mb-3">
-                                <button class="btn btn-light p-3 w-100 h-100">
-                                    <i class="bi bi-clipboard-check fs-3 d-block mb-2"></i>
-                                    Tomar Asistencia
-                                </button>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <button class="btn btn-light p-3 w-100 h-100">
-                                    <i class="bi bi-file-earmark-plus fs-3 d-block mb-2"></i>
-                                    Nueva Tarea
-                                </button>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <button class="btn btn-light p-3 w-100 h-100">
-                                    <i class="bi bi-award fs-3 d-block mb-2"></i>
-                                    Registrar Calificaciones
-                                </button>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <button class="btn btn-light p-3 w-100 h-100">
-                                    <i class="bi bi-envelope fs-3 d-block mb-2"></i>
-                                    Enviar Mensaje
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

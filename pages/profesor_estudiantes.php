@@ -109,14 +109,7 @@ include __DIR__ . '/side_bar_profesor.php';
                     <div class="card-header card-header-academic">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="mb-0 text-white">Lista de Estudiantes</h5>
-                            <div>
-                                <button class="btn btn-sm btn-light me-2">
-                                    <i class="bi bi-download"></i> Exportar
-                                </button>
-                                <button class="btn btn-sm btn-light">
-                                    <i class="bi bi-printer"></i> Imprimir
-                                </button>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="card-body">
@@ -574,9 +567,7 @@ include __DIR__ . '/side_bar_profesor.php';
                         <div class="tab-pane fade" id="grades" role="tabpanel" aria-labelledby="grades-tab">
                             <div class="d-flex justify-content-between mb-3">
                                 <h5>Calificaciones por Curso</h5>
-                                <button class="btn btn-sm btn-academic">
-                                    <i class="bi bi-download"></i> Exportar
-                                </button>
+                                
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
@@ -685,9 +676,7 @@ include __DIR__ . '/side_bar_profesor.php';
                         <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="attendance-tab">
                             <div class="d-flex justify-content-between mb-3">
                                 <h5>Registro de Asistencia</h5>
-                                <button class="btn btn-sm btn-academic">
-                                    <i class="bi bi-download"></i> Exportar
-                                </button>
+                                
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-4">
@@ -859,9 +848,7 @@ include __DIR__ . '/side_bar_profesor.php';
                         <div class="tab-pane fade" id="assignments" role="tabpanel" aria-labelledby="assignments-tab">
                             <div class="d-flex justify-content-between mb-3">
                                 <h5>Tareas Asignadas</h5>
-                                <button class="btn btn-sm btn-academic">
-                                    <i class="bi bi-download"></i> Exportar
-                                </button>
+                                
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
