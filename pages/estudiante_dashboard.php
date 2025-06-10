@@ -1,3 +1,28 @@
+<?php
+session_start();
+
+// Si no hay sesión activa, volvemos al login
+if (empty($_SESSION['user_id'])) {
+    header('Location: ../index.php');
+    exit;
+}
+
+// Conexión
+require_once '../config.php';
+
+// Obtener nombre y apellido
+$stmt = $mysqli->prepare("
+    SELECT nombre, apellido
+      FROM usuarios
+     WHERE id = ?
+");
+$stmt->bind_param('i', $_SESSION['user_id']);
+$stmt->execute();
+$stmt->bind_result($nombre, $apellido);
+$stmt->fetch();
+$stmt->close();
+include __DIR__ . '/side_bar_estudiantes.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,58 +38,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <div class="text-center mb-4">
-                        <h4 class="text-white">Unidad Educativa Eduardo Abaroa</h4>
-                        <p class="text-white-50">Panel de Estudiante</p>
-                    </div>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="estudiante_dashboard.html">
-                                <i class="bi bi-house-door me-2"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="estudiante_cursos.html">
-                                <i class="bi bi-book me-2"></i>
-                                Mis Cursos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="estudiante_calificaciones.html">
-                                <i class="bi bi-award me-2"></i>
-                                Calificaciones
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="estudiante_asistencia.html">
-                                <i class="bi bi-calendar-check me-2"></i>
-                                Asistencia
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="estudiante_tareas.html">
-                                <i class="bi bi-clipboard-check me-2"></i>
-                                Tareas
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="estudiante_perfil.html">
-                                <i class="bi bi-person-circle me-2"></i>
-                                Mi Perfil
-                            </a>
-                        </li>
-                        <li class="nav-item mt-5">
-                            <a class="nav-link" href="../index.html">
-                                <i class="bi bi-box-arrow-left me-2"></i>
-                                Cerrar Sesión
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            
 
             <!-- Main content -->
             <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -77,13 +51,14 @@
                         </div>
                         <div class="dropdown">
                             <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle me-1"></i> Ana Gutiérrez
+                                <i class="bi bi-person-circle me-1"></i>
+                                <?php echo htmlspecialchars($nombre . ' ' . $apellido, ENT_QUOTES, 'UTF-8'); ?>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="estudiante_perfil.html">Mi Perfil</a></li>
-                                <li><a class="dropdown-item" href="estudiante_configuracion.html">Configuración</a></li>
+                                <li><a class="dropdown-item" href="estudiante_perfil.php">Mi Perfil</a></li>
+                                <li><a class="dropdown-item" href="estudiante_configuracion.php">Configuración</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="../index.html">Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" href="../index.php">Cerrar Sesión</a></li>
                             </ul>
                         </div>
                     </div>
@@ -181,7 +156,7 @@
                                 <p class="card-text text-muted">Materias activas</p>
                             </div>
                             <div class="card-footer bg-transparent border-0 text-center">
-                                <a href="estudiante_cursos.html" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
+                                <a href="estudiante_cursos.php" class="btn btn-sm btn-outline-primary">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -194,7 +169,7 @@
                                 <p class="card-text text-muted">Último mes</p>
                             </div>
                             <div class="card-footer bg-transparent border-0 text-center">
-                                <a href="estudiante_asistencia.html" class="btn btn-sm btn-outline-success">Ver Detalles</a>
+                                <a href="estudiante_asistencia.php" class="btn btn-sm btn-outline-success">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -207,7 +182,7 @@
                                 <p class="card-text text-muted">Trimestre actual</p>
                             </div>
                             <div class="card-footer bg-transparent border-0 text-center">
-                                <a href="estudiante_calificaciones.html" class="btn btn-sm btn-outline-info">Ver Detalles</a>
+                                <a href="estudiante_calificaciones.php" class="btn btn-sm btn-outline-info">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -220,7 +195,7 @@
                                 <p class="card-text text-muted">Por entregar</p>
                             </div>
                             <div class="card-footer bg-transparent border-0 text-center">
-                                <a href="estudiante_tareas.html" class="btn btn-sm btn-outline-warning">Ver Detalles</a>
+                                <a href="estudiante_tareas.php" class="btn btn-sm btn-outline-warning">Ver Detalles</a>
                             </div>
                         </div>
                     </div>

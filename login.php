@@ -47,13 +47,13 @@ $_SESSION['role_id'] = $role_id;
 
 switch ($role_id) {
     case 1: // Director
-        header('Location: pages/director_dashboard.html');
+        header('Location: pages/director_dashboard.php');
         break;
     case 2: // Profesor
-        header('Location: pages/profesor_dashboard.html');
+        header('Location: pages/profesor_dashboard.php');
         break;
     case 3: // Estudiante
-        header('Location: pages/estudiante_dashboard.html');
+        header('Location: pages/estudiante_dashboard.php');
         break;
     default:
         header('Location: index.php');

@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+// Si no hay sesión activa, volvemos al login
+if (empty($_SESSION['user_id'])) {
+    header('Location: ../index.php');
+    exit;
+}
+
+// Conexión
+require_once '../config.php';
+
+// Obtener nombre y apellido
+$stmt = $mysqli->prepare("
+    SELECT nombre, apellido
+      FROM usuarios
+     WHERE id = ?
+");
+$stmt->bind_param('i', $_SESSION['user_id']);
+$stmt->execute();
+$stmt->bind_result($nombre, $apellido);
+$stmt->fetch();
+$stmt->close();
+include __DIR__ . '/side_bar_director.php';
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,77 +38,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <div class="text-center mb-4">
-                        <h4 class="text-white">Unidad Educativa Eduardo Abaroa</h4>
-                        <p class="text-white-50">Panel de Director</p>
-                    </div>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="director_dashboard.html">
-                                <i class="bi bi-house-door me-2"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="director_profesores.html">
-                                <i class="bi bi-person-badge me-2"></i>
-                                Profesores
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="director_estudiantes.html">
-                                <i class="bi bi-people me-2"></i>
-                                Estudiantes
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="director_cursos.html">
-                                <i class="bi bi-book me-2"></i>
-                                Cursos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="director_calificaciones.html">
-                                <i class="bi bi-award me-2"></i>
-                                Calificaciones
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="director_asistencia.html">
-                                <i class="bi bi-calendar-check me-2"></i>
-                                Asistencia
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="director_reportes.html">
-                                <i class="bi bi-file-earmark-text me-2"></i>
-                                Reportes
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="director_configuracion.html">
-                                <i class="bi bi-gear me-2"></i>
-                                Configuración
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="director_perfil.html">
-                                <i class="bi bi-person-circle me-2"></i>
-                                Mi Perfil
-                            </a>
-                        </li>
-                        <li class="nav-item mt-5">
-                            <a class="nav-link" href="../index.html">
-                                <i class="bi bi-box-arrow-left me-2"></i>
-                                Cerrar Sesión
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            
 
             <!-- Main content -->
             <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -95,13 +51,14 @@
                         </div>
                         <div class="dropdown">
                             <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle me-1"></i> Carlos Mamani
+                                <i class="bi bi-person-circle me-1"></i>
+                                <?php echo htmlspecialchars($nombre . ' ' . $apellido, ENT_QUOTES, 'UTF-8'); ?>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="director_perfil.html">Mi Perfil</a></li>
-                                <li><a class="dropdown-item" href="director_configuracion.html">Configuración</a></li>
+                                <li><a class="dropdown-item" href="director_perfil.php">Mi Perfil</a></li>
+                                <li><a class="dropdown-item" href="director_configuracion.php">Configuración</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="../index.html">Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" href="../index.php">Cerrar Sesión</a></li>
                             </ul>
                         </div>
                     </div>
@@ -112,12 +69,6 @@
                     <div class="col-12 text-end">
                         <button class="btn btn-success me-2 edit-permission-director" data-bs-toggle="modal" data-bs-target="#newProfessorModal">
                             <i class="bi bi-person-plus"></i> Nuevo Profesor
-                        </button>
-                        <button class="btn btn-primary me-2 edit-permission-director">
-                            <i class="bi bi-upload"></i> Importar Lista
-                        </button>
-                        <button class="btn btn-secondary edit-permission-director">
-                            <i class="bi bi-printer"></i> Imprimir Directorio
                         </button>
                     </div>
                 </div>
@@ -475,110 +426,198 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="crear_profesor.php" method="POST" id="profesorForm">
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="firstName" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="firstName" required>
+                            <label for="firstName" class="form-label">Nombre</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="firstName"
+                                name="nombre"
+                                required
+                            >
                             </div>
                             <div class="col-md-6">
-                                <label for="lastName" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="lastName" required>
+                            <label for="lastName" class="form-label">Apellido</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="lastName"
+                                name="apellido"
+                                required
+                            >
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="email" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="email" required>
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                required
+                            >
                             </div>
                             <div class="col-md-6">
-                                <label for="phone" class="form-label">Teléfono</label>
-                                <input type="tel" class="form-control" id="phone" required>
+                            <label for="phone" class="form-label">Teléfono</label>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                id="phone"
+                                name="telefono"
+                                required
+                            >
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="idNumber" class="form-label">Número de Identidad</label>
-                                <input type="text" class="form-control" id="idNumber" required>
+                            <label for="idNumber" class="form-label">Número de Identidad</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="idNumber"
+                                name="cedula"
+                                required
+                            >
                             </div>
                             <div class="col-md-6">
-                                <label for="birthDate" class="form-label">Fecha de Nacimiento</label>
-                                <input type="date" class="form-control" id="birthDate" required>
+                            <label for="birthDate" class="form-label">Fecha de Nacimiento</label>
+                            <input
+                                type="date"
+                                class="form-control"
+                                id="birthDate"
+                                name="fecha_nacimiento"
+                                required
+                            >
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="department" class="form-label">Departamento</label>
-                                <select class="form-select" id="department" required>
-                                    <option selected disabled value="">Seleccionar departamento...</option>
-                                    <option>Ciencias Exactas</option>
-                                    <option>Humanidades y Letras</option>
-                                    <option>Ciencias Sociales</option>
-                                    <option>Artes y Deportes</option>
-                                </select>
+                            <label for="department" class="form-label">Departamento</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="department"
+                                name="departamento"
+                                placeholder="Ingrese departamento"
+                                required
+                            >
                             </div>
                             <div class="col-md-6">
-                                <label for="position" class="form-label">Cargo</label>
-                                <input type="text" class="form-control" id="position" required>
+                            <label for="position" class="form-label">Cargo</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="position"
+                                name="cargo"
+                                required
+                            >
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="subjects" class="form-label">Materias</label>
-                            <select class="form-select" id="subjects" multiple required>
-                                <option>Matemáticas</option>
-                                <option>Física</option>
-                                <option>Química</option>
-                                <option>Biología</option>
-                                <option>Literatura</option>
-                                <option>Lenguaje</option>
-                                <option>Historia</option>
-                                <option>Geografía</option>
-                                <option>Cívica</option>
-                                <option>Inglés</option>
-                                <option>Francés</option>
-                                <option>Educación Física</option>
-                                <option>Música</option>
-                                <option>Artes Plásticas</option>
-                                <option>Informática</option>
-                                <option>Tecnología</option>
+                            <select
+                            class="form-select"
+                            id="subjects"
+                            name="materias[]"
+                            multiple
+                            required
+                            >
+                            <!-- Asigna el value al ID de cada materia según tu tabla materias -->
+                            <option value="1">Matemáticas</option>
+                            <option value="2">Física</option>
+                            <option value="3">Química</option>
+                            <option value="4">Biología</option>
+                            <!-- … y así hasta Tecnología (id=16) :contentReference[oaicite:2]{index=2} -->
                             </select>
-                            <div class="form-text">Mantenga presionada la tecla Ctrl (o Cmd en Mac) para seleccionar múltiples materias.</div>
+                            <div class="form-text">
+                            Mantenga presionada Ctrl (o Cmd en Mac) para múltiples.
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="startDate" class="form-label">Fecha de Inicio</label>
-                                <input type="date" class="form-control" id="startDate" required>
+                            <label for="startDate" class="form-label">Fecha de Inicio</label>
+                            <input
+                                type="date"
+                                class="form-control"
+                                id="startDate"
+                                name="fecha_inicio"
+                                required
+                            >
                             </div>
                             <div class="col-md-6">
-                                <label for="contractType" class="form-label">Tipo de Contrato</label>
-                                <select class="form-select" id="contractType" required>
-                                    <option selected disabled value="">Seleccionar tipo de contrato...</option>
-                                    <option>Tiempo Completo</option>
-                                    <option>Medio Tiempo</option>
-                                    <option>Por Horas</option>
-                                    <option>Temporal</option>
-                                </select>
+                            <label for="contractType" class="form-label">Tipo de Contrato</label>
+                            <select
+                                class="form-select"
+                                id="contractType"
+                                name="tipo_contrato"
+                                required
+                            >
+                                <option selected disabled value="">
+                                Seleccionar tipo…
+                                </option>
+                                <option value="Tiempo Completo">Tiempo Completo</option>
+                                <option value="Medio Tiempo">Medio Tiempo</option>
+                                <option value="Por Horas">Por Horas</option>
+                                <option value="Temporal">Temporal</option>
+                            </select>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="address" required>
+                            <input
+                            type="text"
+                            class="form-control"
+                            id="address"
+                            name="direccion"
+                            required
+                            >
                         </div>
                         <div class="mb-3">
-                            <label for="academicBackground" class="form-label">Formación Académica</label>
-                            <textarea class="form-control" id="academicBackground" rows="3" required></textarea>
+                            <label for="academicBackground" class="form-label">
+                            Formación Académica
+                            </label>
+                            <textarea
+                            class="form-control"
+                            id="academicBackground"
+                            name="formacion_academica"
+                            rows="3"
+                            required
+                            ></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="profilePhoto" class="form-label">Foto de Perfil</label>
-                            <input class="form-control" type="file" id="profilePhoto">
+                            <label for="profilePhoto" class="form-label">
+                            Foto de Perfil
+                            </label>
+                            <input
+                            class="form-control"
+                            type="file"
+                            id="profilePhoto"
+                            name="foto_perfil"
+                            >
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="sendCredentials" checked>
-                                <label class="form-check-label" for="sendCredentials">
-                                    Enviar credenciales por correo electrónico
-                                </label>
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="sendCredentials"
+                                name="enviar_credenciales"
+                                value="1"
+                                checked
+                            >
+                            <label class="form-check-label" for="sendCredentials">
+                                Enviar credenciales por correo
+                            </label>
                             </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                            Guardar Profesor
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -593,5 +632,31 @@
     <!-- Scripts -->
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('profesorForm');
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const fd = new FormData(form);
+        try {
+        const res = await fetch('crear_profesor.php', {
+            method: 'POST',
+            body: fd
+        });
+        const data = await res.json();
+        if (data.success) {
+            alert(data.message);
+            form.reset();
+        } else {
+            alert('Error: ' + data.message);
+        }
+        } catch (err) {
+        console.error(err);
+        alert('Error de conexión');
+        }
+    });
+    });
+    </script>
+
 </body>
 </html>
