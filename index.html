@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistema Académico - U.E. Eduardo Avaroa</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/academic.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <div class="col-md-8 offset-md-2">
+                <div class="login-container">
+                    <div class="row g-0">
+                        <div class="col-md-6 login-image">
+                            <div class="overlay">
+                                <div class="text-center p-4">
+                                    <img src="img/logo_escuela.png" alt="Logo U.E. Eduardo Avaroa" class="img-fluid mb-3" style="max-height: 120px;">
+                                    <h2 class="text-white">Unidad Educativa Eduardo Abaroa</h2>
+                                    <p class="text-white-50">El Alto, La Paz - Bolivia</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 login-form-container">
+                            <div class="login-form p-4">
+                                <div class="text-center mb-4">
+                                    <h3>Sistema Académico</h3>
+                                    <p class="text-muted">Ingrese sus credenciales para acceder</p>
+                                </div>
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Usuario</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                            <input type="text" class="form-control" id="username" placeholder="Ingrese su nombre de usuario">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Contraseña</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                            <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="userType" class="form-label">Tipo de Usuario</label>
+                                        <select class="form-select" id="userType">
+                                            <option selected disabled>Seleccione su rol</option>
+                                            <option value="estudiante">Estudiante</option>
+                                            <option value="profesor">Profesor</option>
+                                            <option value="director">Director</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">Recordar mis datos</label>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <button type="button" class="btn btn-academic" onclick="login()">Iniciar Sesión</button>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <a href="#" class="text-decoration-none">¿Olvidó su contraseña?</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center p-3 text-muted">
+                    <small>SisSistema Académico Unidad Educativa Eduardo Abaroa © 2025. Todos los derechos reservados.s.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        function login() {
+            const userType = document.getElementById('userType').value;
+            if (userType === 'estudiante') {
+                window.location.href = 'pages/estudiante_dashboard.html';
+            } else if (userType === 'profesor') {
+                window.location.href = 'pages/profesor_dashboard.html';
+            } else if (userType === 'director') {
+                window.location.href = 'pages/director_dashboard.html';
+            } else {
+                alert('Por favor seleccione un tipo de usuario');
+            }
+        }
+    </script>
+</body>
+</html>
