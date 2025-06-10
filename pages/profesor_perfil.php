@@ -175,7 +175,7 @@ include __DIR__ . '/side_bar_profesor.php';
                                     <div class="mb-3">
                                         <label for="otherDegrees" class="form-label">Otros Títulos</label>
                                         <textarea class="form-control" id="otherDegrees" rows="2" readonly>Maestría en Educación Matemática (2015) - Universidad Pedagógica Nacional
-Diplomado en Tecnología Educativa (2018) - Universidad Católica Boliviana</textarea>
+                                    Diplomado en Tecnología Educativa (2018) - Universidad Católica Boliviana</textarea>
                                     </div>
                                 </form>
                             </div>
@@ -210,11 +210,12 @@ Diplomado en Tecnología Educativa (2018) - Universidad Católica Boliviana</tex
                                     <div class="mb-3">
                                         <label for="courses" class="form-label">Cursos Asignados</label>
                                         <textarea class="form-control" id="courses" rows="3" readonly>Matemáticas - 6° Secundaria
-Matemáticas - 5° Secundaria
-Física - 6° Secundaria
-Física - 5° Secundaria
-Química - 6° Secundaria
-Química - 5° Secundaria</textarea>
+                                        Matemáticas - 5° Secundaria
+                                        Física - 6° Secundaria
+                                        Física - 5° Secundaria
+                                        Química - 6° Secundaria
+                                        Química - 5° Secundaria
+                                        </textarea>
                                     </div>
                                 </form>
                             </div>

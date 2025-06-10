@@ -38,7 +38,7 @@
                                 Tareas
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!--No hay archivo ni horario ni perfil--><!--<li class="nav-item">
                             <a class="nav-link" href="estudiante_horario.php">
                                 <i class="bi bi-clock me-2"></i>
                                 Horario
@@ -49,7 +49,7 @@
                                 <i class="bi bi-person me-2"></i>
                                 Mi Perfil
                             </a>
-                        </li>
+                        </li>-->
                         <li class="nav-item mt-5">
                             <a class="nav-link" href="../index.php">
                                 <i class="bi bi-box-arrow-left me-2"></i>
